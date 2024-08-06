@@ -3,3 +3,4 @@ log/
 execute.sh
 output/
 __pycache__/
+.idea
