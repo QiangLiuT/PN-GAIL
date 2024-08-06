@@ -1,0 +1,5 @@
+model/
+log/
+execute.sh
+output/
+__pycache__/
