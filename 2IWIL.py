@@ -72,7 +72,7 @@ parser.add_argument('--vf-iters', type=int, default=30, metavar='V',
 parser.add_argument('--vf-lr', type=float, default=3e-4, metavar='V',
                     help='learning rate of value network')
 parser.add_argument('--noise', type=float, default=0.0, metavar='N')
-parser.add_argument('--eval-epochs', type=int, default=3, metavar='E',
+parser.add_argument('--eval-epochs', type=int, default=5, metavar='E',
                     help='epochs to evaluate model')
 parser.add_argument('--prior', type=float, default=0.2,
                     help='ratio of confidence data')
@@ -84,11 +84,13 @@ parser.add_argument('--save', action='store_true',
 args = parser.parse_args()
 
 env = gym.make(args.env)
+envtest = gym.make(args.env)
 
 num_inputs = env.observation_space.shape[0]
 num_actions = env.action_space.shape[0]
 
 env.seed(args.seed)
+envtest.seed(2 ** 31 - args.seed)
 torch.manual_seed(args.seed)
 np.random.seed(args.seed)
 
@@ -178,12 +180,12 @@ def expert_reward(states, actions):
 def evaluate(episode):
     avg_reward = 0.0
     for _ in range(args.eval_epochs):
-        state = env.reset()
-        for _ in range(10000): # Don't infinite loop while learning
+        state = envtest.reset()
+        for _ in range(10000):  # Don't infinite loop while learning
             state = torch.from_numpy(state).unsqueeze(0)
             action, _, _ = policy_net(Variable(state))
             action = action.data[0].numpy()
-            next_state, reward, done, _ = env.step(action)
+            next_state, reward, done, _ = envtest.step(action)
             avg_reward += reward
             if done:
                 break
