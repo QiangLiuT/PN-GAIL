@@ -29,10 +29,7 @@ This repository contains the PyTorch code for the paper "PN-GAIL: Leveraging Non
  ```
  python wgail.py --env Ant-v2 --num-epochs 6000 --traj-size 600 --save
  ```
- * UID
- ```
- python UID.py --env Ant-v2 --num-epochs 6000 --traj-size 600 --save
- ```
+
 
 ## Acknowledegement
 We would like to thank the authors of [2IWIL/IC-GAIL](https://github.com/kristery/Imitation-Learning-from-Imperfect-Demonstration). Our code structure is largely based on their source code.
