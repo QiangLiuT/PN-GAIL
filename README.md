@@ -1,4 +1,4 @@
-# PN-GAIL: Leveraging Non-optimal Information from Imperfect Demonstrations
+# PN-GAIL: Leveraging Non-optimal Information from Imperfect Demonstrations (ICLR 2025)
 This repository contains the PyTorch code for the paper "PN-GAIL: Leveraging Non-optimal Information from Imperfect Demonstrations"
 
 ## Requirement
